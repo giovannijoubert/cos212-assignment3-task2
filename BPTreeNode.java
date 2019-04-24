@@ -104,7 +104,47 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	 */
 	public TValue search(TKey key) 
 	{
-		// Your code goes here
+		//always ran on root
+		if (this.isLeaf()){ // if root is leaf just do search
+			for(int i = 0; i< this.getKeyCount(); i++){
+				if (this.getKey(i).equals(key)){
+					BPTreeLeafNode<TKey, TValue> golden = (BPTreeLeafNode<TKey, TValue>)this;
+					return golden.getValue(i);
+				}
+			}
+			return null;
+		}
+
+		Boolean complete = false;
+
+		BPTreeInnerNode<TKey, TValue> Traverse = (BPTreeInnerNode<TKey, TValue> )this;
+
+		while(! complete){
+			if (Traverse.getChild(0).isLeaf()){
+				complete = true;
+			} else {
+				Traverse = (BPTreeInnerNode<TKey, TValue>)Traverse.getChild(0);
+			}
+		}
+
+		complete = false;
+		BPTreeLeafNode<TKey, TValue> TraverseLeaf = (BPTreeLeafNode<TKey, TValue>)Traverse.getChild(0);
+		while(! complete){
+			for(int i = 0; i< TraverseLeaf.getKeyCount(); i++){
+				if (TraverseLeaf.getKey(i).equals(key)){
+					complete = true;
+					return TraverseLeaf.getValue(i);
+				}
+			}
+			if(TraverseLeaf.rightSibling == null){
+				complete = true;
+				break;
+			}
+			TraverseLeaf = (BPTreeLeafNode<TKey, TValue>)TraverseLeaf.rightSibling;
+		}
+	
+		
+
 		return null;
 	}
 
@@ -116,7 +156,7 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	 */
 	public BPTreeNode<TKey, TValue> insert(TKey key, TValue value) 
 	{
-		return this; // nothing will ever be a pure BPTreeNode
+		return this; // no instance will ever be a pure BPTreeNode
 	}
 
 	
@@ -129,7 +169,7 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	public BPTreeNode<TKey, TValue> delete(TKey key) 
 	{
 		// Your code goes here
-		return null;
+		return this; // no instance will ever be a pure BPTreeNode
 	}
 	
 }

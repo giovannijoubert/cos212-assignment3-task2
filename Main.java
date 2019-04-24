@@ -6,15 +6,24 @@ public class Main {
 	//General tree
 	BPTree<Integer, Integer> tree = new BPTree<Integer, Integer>(4); // A B+ Tree with order 4
    
-	tree.insert(20, 5000);
-	tree.insert(10, 1000);
-	tree.insert(30, 9000);
-	tree.insert(50, 8000);
-	tree.insert(40, 2000);
-	tree.insert(60, 7000);
-	tree.insert(90, 3000);
+	tree.insert(29, 5000);
+	tree.insert(57, 1000);
+	tree.insert(41, 9000);
+	tree.insert(20, 8000);
+	tree.insert(21, 2000);
+	tree.insert(55, 3000);
 	tree.insert(70, 6000);
-	tree.insert(80, 4000); 
+	tree.insert(80, 4000);
+	tree.insert(50, 8000);
+	tree.insert(661, 2000);
+	tree.insert(15, 3000);
+	tree.insert(40, 6000);
+	tree.insert(410, 4000);
+	tree.insert(510, 8000);
+	tree.insert(6651, 2000);
+	tree.insert(151, 3000);
+	tree.insert(450, 6000);
+	tree.insert(45, 4000); 
 
 	System.out.println("Structure of the constucted tree is : ");
 	tree.print();

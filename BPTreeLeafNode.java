@@ -34,7 +34,7 @@ class BPTreeLeafNode<TKey extends Comparable<TKey>, TValue> extends BPTreeNode<T
 
 	////// Implement functions below this line //////
 
-
+	
 
 	public BPTreeNode<TKey, TValue> insert(TKey key, TValue value) 
 	{
@@ -51,7 +51,6 @@ class BPTreeLeafNode<TKey extends Comparable<TKey>, TValue> extends BPTreeNode<T
 					for(int j = this.getKeyCount(); j > i; j--){ //MOVE UP TO MAKE SPACE FOR NEW KEYPAIR
 						this.setKey(j, this.getKey(j-1));
 						this.setValue(j, this.getValue(j-1));
-						break;
 					}
 					this.setKey(i, key);
 					this.setValue(i, value);
@@ -85,10 +84,6 @@ class BPTreeLeafNode<TKey extends Comparable<TKey>, TValue> extends BPTreeNode<T
 				insertPos = 0;
 			} else {
 				BPTreeInnerNode<TKey, TValue> parent = (BPTreeInnerNode<TKey, TValue>)oldLeaf.parentNode;
-		
-
-
-
 				insertPos = parent.promote(oldLeaf.getKey(oldLeaf.getKeyCount()/2));
 				newInner = parent;
 			}
@@ -110,14 +105,14 @@ class BPTreeLeafNode<TKey extends Comparable<TKey>, TValue> extends BPTreeNode<T
 			newLeafLeft.setParent(newInner);
 			newLeafRight.setParent(newInner);
 
-			if(insertPos-1 >= 0){
-				newInner.getChild(insertPos-1).rightSibling = newLeafLeft;
-				newLeafLeft.leftSibling = newInner.getChild(insertPos-1);
-			}
-			if(insertPos+2 < newInner.getKeyCount()){
-				newInner.getChild(insertPos+2).leftSibling = newLeafRight;
-				newLeafRight.rightSibling = newInner.getChild(insertPos+2);
-			}
+			newLeafLeft.leftSibling = oldLeaf.leftSibling;
+			newLeafRight.rightSibling = oldLeaf.rightSibling;
+
+			if(newLeafLeft.leftSibling != null)
+			newLeafLeft.leftSibling.rightSibling = newLeafLeft;
+
+			if(newLeafRight.rightSibling != null)
+			newLeafRight.rightSibling.leftSibling = newLeafRight;
 
 			if(oldLeaf.parentNode == null){
 				newInner.setChild(0, newLeafLeft);
@@ -126,9 +121,25 @@ class BPTreeLeafNode<TKey extends Comparable<TKey>, TValue> extends BPTreeNode<T
 				newInner.setChild(insertPos, newLeafLeft);
 				newInner.setChild(insertPos+1, newLeafRight);
 			}
+			
 		
 		
 			return newInner;
 		
-	} 
+	}
+	
+	public BPTreeNode<TKey, TValue> delete(TKey key) 
+	{
+		for(int i = 0; i < this.getKeyCount(); i++){
+			if(this.getKey(i).equals(key)){
+				for(int j = i; j < this.getKeyCount(); j++){
+					this.setKey(j, this.getKey(j+1));
+					this.setValue(j, this.getValue(j+1));
+				}
+				this.keyTally--;
+				break;
+			}
+		}
+		return this; 
+	}
 }
