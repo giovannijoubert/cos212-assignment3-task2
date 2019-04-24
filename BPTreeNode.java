@@ -94,8 +94,10 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 
 	////// Implement the functions below this line //////
 	
-	
-	
+/*	public abstract void setValue(int index, TValue value);
+	public abstract TValue getValue(int index);
+	public abstract void setChild(int index, BPTreeNode<TKey, TValue> child); */
+
 	/**
 	 * Search a key on the B+ tree and return its associated value. If the given key 
 	 * is not found, null should be returned.
@@ -103,6 +105,7 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	public TValue search(TKey key) 
 	{
 		// Your code goes here
+		return null;
 	}
 
 
@@ -113,9 +116,10 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	 */
 	public BPTreeNode<TKey, TValue> insert(TKey key, TValue value) 
 	{
-		// Your code goes here
+		return this; // nothing will ever be a pure BPTreeNode
 	}
 
+	
 
 
 	/**
@@ -125,6 +129,7 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 	public BPTreeNode<TKey, TValue> delete(TKey key) 
 	{
 		// Your code goes here
+		return null;
 	}
 	
 }
