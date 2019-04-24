@@ -148,6 +148,44 @@ abstract class BPTreeNode<TKey extends Comparable<TKey>, TValue> {
 		return null;
 	}
 
+	//REMOVE BEFORE UPLOAD
+	public void printInorder(BPTreeNode<TKey, TValue> root) 
+	{
+		//always ran on root
+		if (this.isLeaf()){ // if root is leaf just do search
+			for(int i = 0; i< this.getKeyCount(); i++){
+				System.out.println(this.getKey(i));
+			}
+			return;
+		}
+
+		Boolean complete = false;
+
+		BPTreeInnerNode<TKey, TValue> Traverse = (BPTreeInnerNode<TKey, TValue> )this;
+
+		while(! complete){
+			if (Traverse.getChild(0).isLeaf()){
+				complete = true;
+			} else {
+				Traverse = (BPTreeInnerNode<TKey, TValue>)Traverse.getChild(0);
+			}
+		}
+
+		complete = false;
+		BPTreeLeafNode<TKey, TValue> TraverseLeaf = (BPTreeLeafNode<TKey, TValue>)Traverse.getChild(0);
+		while(! complete){
+			for(int i = 0; i< TraverseLeaf.getKeyCount(); i++){
+				System.out.print(TraverseLeaf.getKey(i));
+				System.out.print("(" + TraverseLeaf.getValue(i) + ") ");
+					
+			}
+			if(TraverseLeaf.rightSibling == null){
+				complete = true;
+				break;
+			}
+			TraverseLeaf = (BPTreeLeafNode<TKey, TValue>)TraverseLeaf.rightSibling;
+		}
+	}
 
 
 	/**

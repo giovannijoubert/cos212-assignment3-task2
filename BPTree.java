@@ -64,4 +64,11 @@ public class BPTree<TKey extends Comparable<TKey>, TValue> {
 		}
 	}
 
+	//REMOVE BEFORE UPLOAD
+	public void printInorder() {
+		System.out.println("PRINTING TREE IN ORDER");
+		root.printInorder(root);
+		System.out.println();
+	}
+
 }

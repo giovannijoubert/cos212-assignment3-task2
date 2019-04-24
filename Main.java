@@ -14,16 +14,18 @@ public class Main {
 	tree.insert(55, 3000);
 	tree.insert(70, 6000);
 	tree.insert(80, 4000);
-	tree.insert(50, 8000);
-	tree.insert(661, 2000);
-	tree.insert(15, 3000);
-	tree.insert(40, 6000);
-	tree.insert(410, 4000);
-	tree.insert(510, 8000);
-	tree.insert(6651, 2000);
-	tree.insert(151, 3000);
-	tree.insert(450, 6000);
-	tree.insert(45, 4000); 
+	tree.insert(50, 81230);
+	tree.insert(661, 20421400);
+	tree.insert(15, 3021400);
+	tree.insert(40, 6001240);
+	tree.insert(410, 4045100);
+	tree.insert(510, 8035100);
+	tree.insert(6651, 200140);
+	tree.insert(151, 30041240);
+	tree.insert(450, 605500);
+	tree.insert(45, 40100); 
+
+	tree.printInorder();
 
 	System.out.println("Structure of the constucted tree is : ");
 	tree.print();
@@ -69,6 +71,8 @@ public class Main {
 	else
 		System.out.println("Key not found!");
 
+
+	/*
 	// DB student table indexes
 	BPTree<Integer, Integer> pktree = new BPTree<Integer, Integer>(4); // A B+ Tree with order 4
 	pktree.insert(16094340, 100);
@@ -103,7 +107,7 @@ public class Main {
 		System.out.println("Found key with value " + result);
 	else
 		System.out.println("Key not found!");
-
+*/
 	/* Expected Output:
 	Structure of the constucted tree is :
 	Level 1 [ 30 50 70]
